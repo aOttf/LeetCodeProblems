@@ -724,6 +724,99 @@ namespace Solutions
 
             #endregion Linked List
 
+            #region Trees
+            
+          public class TreeNode
+           {
+                public int val;
+                public TreeNode left;
+                public TreeNode right;
+                public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+               {
+                   this.val = val;
+                   this.left = left;
+                   this.right = right;
+                }
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="root"></param>
+            /// <param name="low"></param>
+            /// <param name="high"></param>
+            /// <returns></returns>
+            public int RangeSumBST(TreeNode root, int low, int high)
+            {
+                Stack<TreeNode> st = new Stack<TreeNode>();
+                st.Push(root);
+                int sum = 0;
+
+                TreeNode cur;
+                while (st.Count != 0)
+                {
+                    cur = st.Pop();
+                    if (cur != null)
+                    {
+
+
+                        if (cur.val >= low && cur.val <= high)
+                        {
+                            sum += cur.val;
+
+                        }
+
+                        if (cur.val < high)
+                        {
+                            st.Push(cur.right);
+                        }
+
+                        if (cur.val > low)
+                        {
+                            st.Push(cur.left);
+                        }
+
+
+                    }
+
+                }
+
+
+                return sum;
+
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="root"></param>
+            /// <param name="low"></param>
+            /// <param name="high"></param>
+            /// <returns></returns>
+            public int RangeSumBSTRec(TreeNode root, int low, int high)
+            {
+
+                return RangeSumDFS(root);
+
+                int RangeSumDFS(TreeNode node)
+                {
+                    if (node == null)
+                        return 0;
+
+                    if (node.val >= low && node.val <= high)
+                        return node.val + RangeSumDFS(node.left) + RangeSumDFS(node.right);
+
+                    if (node.val < low)
+                        return RangeSumDFS(node.right);
+
+                    return RangeSumDFS(node.left);
+
+
+                }
+            }
+
+           
+
             public static void Main()
             {
                 Solution sol = new Solution();
