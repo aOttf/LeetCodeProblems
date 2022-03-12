@@ -686,10 +686,41 @@ namespace Solutions
                 return head;
             }
 
-            //public ListNode SwapNodes(ListNode head, int k)
-            //{
-            //    //Find the node before the desired one
-            //}
+            public ListNode SwapPairs(ListNode head)
+            {
+                ListNode dummy = new ListNode(-1, head);
+                ListNode prev, cur;
+                prev = dummy;
+                cur = head;
+
+                while (cur != null && cur.next != null)
+                {
+                    ListNode first, second;
+                    first = cur.next;
+                    second = first.next;
+
+                    prev.next = first;
+                    first.next = cur;
+                    cur.next = second;
+
+                    prev = cur;
+                    cur = cur.next;
+                }
+
+                return dummy.next;
+            }
+
+            public ListNode SwapNodes(ListNode head, int k)
+            {
+                ListNode dummy = new ListNode();
+                dummy.next = head;
+
+                //Find nodes just before the desired ones
+                ListNode headKBefore, tailKBefore;
+                headKBefore = tailKBefore = dummy;
+
+
+            }
 
             #endregion Linked List
 
